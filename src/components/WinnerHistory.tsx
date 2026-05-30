@@ -443,7 +443,7 @@ export default function WinnerHistory({
                       <tr className="bg-gray-50">
                         <td className="border border-black p-1"></td>
                         <td className="border border-black p-2 font-bold pt-3 uppercase" colSpan={4}>
-                          BID. {dept.replace('Bidang', '')}
+                          {dept.toUpperCase().startsWith('UPT') || dept.toUpperCase() === 'KARYAWATI' ? dept : `BID. ${dept.replace('Bidang', '')}`}
                         </td>
                       </tr>
                     )}

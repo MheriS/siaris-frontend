@@ -19,7 +19,7 @@ interface MemberManagementProps {
   onBulkImport: (members: Omit<Member, 'id'>[]) => void;
 }
 
-const DEPARTMENTS = ["Sekretariat", "Bina Marga", "Cipta Karya", "Sumber Daya Air", "Tata Ruang", "Pengurus Inti", "Pendidikan", "Ekonomi", "Sosial Budaya"];
+const DEPARTMENTS = ["Sekretariat", "Bina Marga", "Cipta Karya", "Sumber Daya Air", "Tata Ruang", "Pengurus Inti", "Pendidikan", "Ekonomi", "Sosial Budaya", "Air Minum dan PLP", "Bina Jasa Kontruksi", "Penataan Bangunan dan Gedung", "UPT IPLT", "UPT Wilayah Timur", "UPT Wilayah Barat", "UPT Kepulauan II", "Karyawati"];
 
 export default function MemberManagement({
   members, onAddMember, onUpdateMember, onDeleteMember, onBulkImport
@@ -631,7 +631,9 @@ export default function MemberManagement({
                     {/* Department Subheader */}
                     <tr className="bg-gray-50">
                       <td className="border border-black p-1"></td>
-                      <td className="border border-black p-1 font-bold pt-3 uppercase" colSpan={4}>BID. {dept.replace('Bidang', '')}</td>
+                      <td className="border border-black p-1 font-bold pt-3 uppercase" colSpan={4}>
+                        {dept.toUpperCase().startsWith('UPT') || dept.toUpperCase() === 'KARYAWATI' ? dept : `BID. ${dept.replace('Bidang', '')}`}
+                      </td>
                     </tr>
 
                     {/* Members in Department */}
