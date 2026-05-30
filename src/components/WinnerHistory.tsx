@@ -430,66 +430,7 @@ export default function WinnerHistory({
                   .sort()
               ];
 
-              const orderedMembers: Member[] = [];
-              // Pengurus Inti paling atas
-              members
-                .filter(m => m.bidang === 'Pengurus Inti' && m.status === 'Aktif')
-                .forEach(m => orderedMembers.push(m));
-
-              // Bidang lain
-              uniqueDepts.forEach(dept => {
-                members
-                  .filter(m => (m.bidang || 'Tanpa Bidang') === dept && m.status === 'Aktif')
-                  .forEach(m => {
-                    orderedMembers.push(m);
-                  });
-              });
-
-              {/* Pengurus Inti tanpa header bidang */ }
-              {
-                members
-                  .filter(m => m.bidang === 'Pengurus Inti' && m.status === 'Aktif')
-                  .map((mem) => {
-                    const globalIdx =
-                      orderedMembers.findIndex(m => m.id === mem.id) + 1;
-
-                    return (
-                      <tr key={mem.id} className="h-[3.5rem]">
-                        <td className="border border-black p-1 text-center font-medium">
-                          {globalIdx}
-                        </td>
-
-                        <td className="border border-black p-2 uppercase font-medium">
-                          {mem.namaLengkap}
-                        </td>
-
-                        <td className="border border-black p-2 uppercase text-center font-medium">
-                          {mem.jabatan || 'Anggota'}
-                        </td>
-
-                        {globalIdx % 2 !== 0 ? (
-                          <>
-                            <td className="border border-black p-1 relative w-[15%]">
-                              <span className="text-[10px] text-black absolute top-1 left-2">
-                                {globalIdx}
-                              </span>
-                            </td>
-                            <td className="border border-black p-1 w-[15%]"></td>
-                          </>
-                        ) : (
-                          <>
-                            <td className="border border-black p-1 w-[15%]"></td>
-                            <td className="border border-black p-1 relative w-[15%]">
-                              <span className="text-[10px] text-black absolute top-5 left-2">
-                                {globalIdx}
-                              </span>
-                            </td>
-                          </>
-                        )}
-                      </tr>
-                    );
-                  })
-              }
+              let counter = 0;
 
               return uniqueDepts.map((dept) => {
                 const deptMembers = members.filter(m => (m.bidang || 'Tanpa Bidang') === dept && m.status === 'Aktif');
@@ -509,14 +450,14 @@ export default function WinnerHistory({
 
                     {/* Members in Department */}
                     {deptMembers.map((mem) => {
-                      const globalIdx = orderedMembers.findIndex(m => m.id === mem.id) + 1;
+                      counter++;
+                      const globalIdx = counter;
                       return (
                         <tr key={mem.id} className="h-[3.5rem]">
                           <td className="border border-black p-1 text-center font-medium">{globalIdx}</td>
                           <td className="border border-black p-2 uppercase font-medium">{mem.namaLengkap}</td>
                           <td className="border border-black p-2 uppercase text-center font-medium">
                             {mem.jabatan || 'Anggota'}<br />
-                            {/* <span className="text-[10px] text-gray-500 capitalize">{dept}</span> */}
                           </td>
 
                           {/* Alternating Signature Cells */}
