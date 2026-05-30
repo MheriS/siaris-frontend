@@ -609,10 +609,10 @@ export default function MemberManagement({
         <table className="w-full max-w-full border-collapse border border-black text-xs">
           <thead>
             <tr className="bg-gray-200 uppercase text-center font-bold">
-              <th className="border border-black p-2 w-[6%]">NO.</th>
-              <th className="border border-black p-2 w-[40%]">NAMA</th>
-              <th className="border border-black p-2 w-[24%]">JABATAN</th>
-              <th className="border border-black p-2 w-[30%]" colSpan={2}>DAFTAR HADIR</th>
+              <th className="border border-black p-2 w-[5%]">NO.</th>
+              <th className="border border-black p-2 w-[35%]">NAMA</th>
+              <th className="border border-black p-2 w-[20%]">JABATAN</th>
+              <th className="border border-black p-2 w-[40%]">DAFTAR HADIR</th>
             </tr>
           </thead>
           <tbody>
@@ -620,7 +620,7 @@ export default function MemberManagement({
               <td className="border border-black p-1">1</td>
               <td className="border border-black p-1">2</td>
               <td className="border border-black p-1">3</td>
-              <td className="border border-black p-1" colSpan={2}>4</td>
+              <td className="border border-black p-1">4</td>
             </tr>
             {(() => {
               let counter = 0;
@@ -631,7 +631,7 @@ export default function MemberManagement({
                     {/* Department Subheader */}
                     <tr className="bg-gray-50">
                       <td className="border border-black p-1"></td>
-                      <td className="border border-black p-1 font-bold pt-3 uppercase" colSpan={4}>
+                      <td className="border border-black p-1 font-bold pt-3 uppercase" colSpan={3}>
                         {dept.toUpperCase().startsWith('UPT') || dept.toUpperCase() === 'KARYAWATI' ? dept : `BID. ${dept.replace('Bidang', '')}`}
                       </td>
                     </tr>
@@ -647,21 +647,11 @@ export default function MemberManagement({
                           <td className="border border-black p-2 uppercase text-center font-medium">{mem.jabatan || 'Anggota'}</td>
 
                           {/* Alternating Signature Cells */}
-                          {globalIdx % 2 !== 0 ? (
-                            <>
-                              <td className="border border-black p-2 relative h-12 w-[15%] text-left">
-                                <span className="text-[10px] text-gray-800 absolute top-1 left-2">{globalIdx}</span>
-                              </td>
-                              <td className="border border-black p-2 relative h-12 w-[15%]"></td>
-                            </>
-                          ) : (
-                            <>
-                              <td className="border border-black p-2 relative h-12 w-[15%]"></td>
-                              <td className="border border-black p-2 relative h-12 w-[15%] text-right bg-[#fcfcfc]">
-                                <span className="text-[10px] text-gray-800 absolute top-5 left-2">{globalIdx}</span>
-                              </td>
-                            </>
-                          )}
+                          <td className={`border border-black p-2 relative h-14 ${globalIdx % 2 === 0 ? 'bg-[#fcfcfc]' : ''}`}>
+                            <span className={`text-[10px] text-gray-800 absolute ${globalIdx % 2 !== 0 ? 'top-1 left-2' : 'top-5 left-1/2'}`}>
+                              {globalIdx}
+                            </span>
+                          </td>
                         </tr>
                       );
                     })}
@@ -670,7 +660,6 @@ export default function MemberManagement({
                       <tr className="h-10">
                         <td className="border border-black p-1"></td>
                         <td className="border border-black p-2 italic text-gray-400">Tidak ada anggota aktif</td>
-                        <td className="border border-black p-2"></td>
                         <td className="border border-black p-2"></td>
                         <td className="border border-black p-2"></td>
                       </tr>

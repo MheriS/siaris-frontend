@@ -405,8 +405,8 @@ export default function WinnerHistory({
             <tr className="bg-gray-200 uppercase text-center font-bold">
               <th className="border border-black p-2 w-[5%]">NO.</th>
               <th className="border border-black p-2 w-[35%]">NAMA</th>
-              <th className="border border-black p-2 w-[30%]">JABATAN</th>
-              <th className="border border-black p-2 w-[30%]" colSpan={2}>TANDA TANGAN</th>
+              <th className="border border-black p-2 w-[20%]">JABATAN</th>
+              <th className="border border-black p-2 w-[40%]">TANDA TANGAN</th>
             </tr>
           </thead>
           <tbody>
@@ -414,7 +414,7 @@ export default function WinnerHistory({
               <td className="border border-black p-1">1</td>
               <td className="border border-black p-1">2</td>
               <td className="border border-black p-1">3</td>
-              <td className="border border-black p-1" colSpan={2}>4</td>
+              <td className="border border-black p-1">4</td>
             </tr>
             {(() => {
               const allDepts = Array.from(
@@ -442,7 +442,7 @@ export default function WinnerHistory({
                     {dept !== 'Pengurus Inti' && (
                       <tr className="bg-gray-50">
                         <td className="border border-black p-1"></td>
-                        <td className="border border-black p-2 font-bold pt-3 uppercase" colSpan={4}>
+                        <td className="border border-black p-2 font-bold pt-3 uppercase" colSpan={3}>
                           {dept.toUpperCase().startsWith('UPT') || dept.toUpperCase() === 'KARYAWATI' ? dept : `BID. ${dept.replace('Bidang', '')}`}
                         </td>
                       </tr>
@@ -460,22 +460,12 @@ export default function WinnerHistory({
                             {mem.jabatan || 'Anggota'}<br />
                           </td>
 
-                          {/* Alternating Signature Cells */}
-                          {globalIdx % 2 !== 0 ? (
-                            <>
-                              <td className="border-b border-r border-t border-l border-black p-1 relative w-[15%]">
-                                <span className="text-[10px] text-black absolute top-1 left-2">{globalIdx}</span>
-                              </td>
-                              <td className="border border-black p-1 relative w-[15%]"></td>
-                            </>
-                          ) : (
-                            <>
-                              <td className="border border-black p-1 relative w-[15%]"></td>
-                              <td className="border-b border-r border-t border-l border-black p-1 relative w-[15%]">
-                                <span className="text-[10px] text-black absolute top-5 left-2">{globalIdx}</span>
-                              </td>
-                            </>
-                          )}
+                          {/* Alternating Signature Cell (Merged) */}
+                          <td className={`border border-black p-1 relative h-[3.5rem] ${globalIdx % 2 === 0 ? 'bg-[#fcfcfc]' : ''}`}>
+                            <span className={`text-[10px] text-black absolute ${globalIdx % 2 !== 0 ? 'top-1 left-2' : 'top-5 left-1/2'}`}>
+                              {globalIdx}
+                            </span>
+                          </td>
                         </tr>
                       );
                     })}
@@ -488,8 +478,7 @@ export default function WinnerHistory({
               <tr className="h-[3.5rem]">
                 <td className="border border-black p-1"></td>
                 <td className="border border-black p-2 italic text-gray-500 text-center" colSpan={2}>Tidak ada anggota aktif</td>
-                <td className="border border-black p-1 relative w-[15%]"></td>
-                <td className="border border-black p-1 relative w-[15%]"></td>
+                <td className="border border-black p-1 relative w-[40%]"></td>
               </tr>
             )}
           </tbody>
