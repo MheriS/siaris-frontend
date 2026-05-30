@@ -11,6 +11,11 @@ if (API_BASE && !API_BASE.endsWith('/api')) {
     API_BASE = API_BASE.replace(/\/$/, '') + '/api';
 }
 
+// Dynamically replace localhost/127.0.0.1 with the actual LAN IP for local testing
+if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    API_BASE = API_BASE.replace('127.0.0.1', window.location.hostname).replace('localhost', window.location.hostname);
+}
+
 // ─── Helper ────────────────────────────────────────────────────────────────────
 async function request<T>(
     path: string,
