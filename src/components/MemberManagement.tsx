@@ -19,7 +19,7 @@ interface MemberManagementProps {
   onBulkImport: (members: Omit<Member, 'id'>[]) => void;
 }
 
-const DEPARTMENTS = ["Sekretariat", "Bina Marga", "Cipta Karya", "Sumber Daya Air", "Tata Ruang", "Pengurus Inti"];
+const DEPARTMENTS = ["Sekretariat", "Bina Marga", "Cipta Karya", "Sumber Daya Air", "Tata Ruang", "Pengurus Inti", "Pendidikan", "Ekonomi", "Sosial Budaya"];
 
 export default function MemberManagement({
   members, onAddMember, onUpdateMember, onDeleteMember, onBulkImport
@@ -459,13 +459,19 @@ export default function MemberManagement({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Jabatan di DWP</label>
-                    <input
-                      type="text"
-                      placeholder="Koordinator, Anggota, Sekretaris"
+                    <select
                       value={formData.jabatan}
                       onChange={(e) => setFormData({ ...formData, jabatan: e.target.value })}
-                      className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/25 text-xs text-white placeholder-slate-500 font-sans"
-                    />
+                      className="w-full px-4 py-2 bg-slate-900 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/25 text-xs text-slate-200 cursor-pointer"
+                    >
+                      <option value="Ketua" className="bg-slate-905 text-white">Ketua</option>
+                      <option value="Wakil Ketua" className="bg-slate-905 text-white">Wakil Ketua</option>
+                      <option value="Sekretaris" className="bg-slate-905 text-white">Sekretaris</option>
+                      <option value="Wakil Sekretaris" className="bg-slate-905 text-white">Wakil Sekretaris</option>
+                      <option value="Bendahara I" className="bg-slate-905 text-white">Bendahara I</option>
+                      <option value="Bendahara II" className="bg-slate-905 text-white">Bendahara II</option>
+                      <option value="Anggota" className="bg-slate-905 text-white">Anggota</option>
+                    </select>
                   </div>
 
                   <div>
@@ -617,13 +623,7 @@ export default function MemberManagement({
               <td className="border border-black p-1" colSpan={2}>4</td>
             </tr>
             {(() => {
-              const orderedMembers: Member[] = [];
-              DEPARTMENTS.forEach(dept => {
-                filteredMembers.filter(m => m.bidang === dept && m.status === 'Aktif').forEach(m => {
-                  orderedMembers.push(m);
-                });
-              });
-
+              let counter = 0;
               return DEPARTMENTS.map((dept) => {
                 const deptMembers = filteredMembers.filter(m => m.bidang === dept && m.status === 'Aktif');
                 return (
@@ -636,7 +636,8 @@ export default function MemberManagement({
 
                     {/* Members in Department */}
                     {deptMembers.map((mem) => {
-                      const globalIdx = orderedMembers.findIndex(m => m.id === mem.id) + 1;
+                      counter++;
+                      const globalIdx = counter;
                       return (
                         <tr key={mem.id} className="h-10">
                           <td className="border border-black p-1 text-center font-medium">{globalIdx}</td>
