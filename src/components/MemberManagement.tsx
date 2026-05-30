@@ -647,10 +647,10 @@ export default function MemberManagement({
                           <td className="border border-black p-2 uppercase text-center font-medium">{mem.jabatan || 'Anggota'}</td>
 
                           {/* Alternating Signature Cell (Merged) */}
-                          <td className={`border border-black p-2 h-14 align-top ${globalIdx % 2 === 0 ? 'bg-[#fcfcfc]' : ''}`}>
-                            <div className={`text-[10px] text-gray-800 ${globalIdx % 2 !== 0 ? 'text-left' : 'pl-12 pt-4'}`}>
+                          <td className="border border-black p-1 relative h-14">
+                            <span className={`text-[10px] text-black absolute ${globalIdx % 2 !== 0 ? 'top-1 left-2' : 'top-5 left-1/2'}`}>
                               {globalIdx}.
-                            </div>
+                            </span>
                           </td>
                         </tr>
                       );
