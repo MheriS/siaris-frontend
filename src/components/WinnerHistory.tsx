@@ -461,10 +461,10 @@ export default function WinnerHistory({
                           </td>
 
                           {/* Alternating Signature Cell (Merged) */}
-                          <td className={`border border-black p-1 relative h-[3.5rem] ${globalIdx % 2 === 0 ? 'bg-[#fcfcfc]' : ''}`}>
-                            <span className={`text-[10px] text-black absolute ${globalIdx % 2 !== 0 ? 'top-1 left-2' : 'top-5 left-1/2'}`}>
-                              {globalIdx}
-                            </span>
+                          <td className={`border border-black p-1 h-[3.5rem] align-top ${globalIdx % 2 === 0 ? 'bg-[#fcfcfc]' : ''}`}>
+                            <div className={`text-[10px] text-black ${globalIdx % 2 !== 0 ? 'text-left' : 'pl-12 pt-4'}`}>
+                              {globalIdx}.
+                            </div>
                           </td>
                         </tr>
                       );
