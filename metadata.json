@@ -1,0 +1,6 @@
+{
+  "name": "SIARIS DW-PUPR",
+  "description": "Sistem Informasi Arisan Dharma Wanita Persatuan PUPR Sumenep - Membantu manajemen data anggota, pengundian online & offline, serta pencetakan laporan arisan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
